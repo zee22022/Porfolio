@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hà Duy Anh | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables cho bảng màu chuẩn Figma Dark Mode */
+        :root {
+            --bg-body: #0f172a;       /* Nền tổng thể */
+            --bg-card: #1e293b;       /* Nền các thẻ dự án */
+            --text-main: #f8fafc;     /* Chữ chính */
+            --text-muted: #94a3b8;    /* Chữ phụ */
+            --accent: #10b981;        /* Màu nhấn (Xanh lá Emerald) */
+            --accent-hover: #059669;  
+            --border-color: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Container giới hạn chiều rộng */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* --- Hero Section (Phần giới thiệu) --- */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px 0;
+            gap: 40px;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--text-main); /* Đồng nhất màu trắng cho tên */
+        }
+
+        .hero-content h3 {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .hero-content p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        /* Vòng tròn ảnh Avatar (Đã được cập nhật hiển thị ảnh thật) */
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .avatar-img {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            border: 4px solid var(--bg-card);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            object-fit: cover; /* Đảm bảo ảnh không bị méo */
+            object-position: center; /* Căn giữa ảnh */
+            background-color: #1e293b; /* Màu nền dự phòng nếu ảnh chưa load */
+        }
+
+        /* Nút chung */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: var(--accent);
+            color: var(--bg-body);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--accent);
+            color: var(--bg-body);
+        }
+
+        /* --- Projects Section (Cấu trúc Lưới - Grid) --- */
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            background-color: var(--accent);
+            bottom: -10px;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .project-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        .project-card .badge {
+            display: inline-block;
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--accent);
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            flex-grow: 1; /* Đẩy nút xuống dưới cùng */
+        }
+
+        .project-card ul {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .project-card .btn-pdf {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            background-color: #273446;
+            color: var(--text-main);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .project-card .btn-pdf:hover {
+            background-color: var(--accent);
+            color: var(--bg-body);
+        }
+
+        /* --- Footer --- */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding: 40px 0;
+            }
+            .hero-image {
+                justify-content: center;
+            }
+            .avatar-img {
+                width: 250px;
+                height: 250px;
+            }
+            nav {
+                display: none; /* Ẩn menu ngang trên điện thoại */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <a href="#" class="logo">Portfolio<span>.</span></a>
+            <nav>
+                <a href="#about">Giới thiệu</a>
+                <a href="#projects">Dự án</a>
+                <a href="#summary">Tổng kết</a>
+            </nav>
+        </header>
+
+        <section class="hero" id="about">
+            <div class="hero-content">
+                <h3>👋 Xin chào, tôi là</h3>
+                <h1>Hà Duy Anh</h1>
+                <p>Sinh viên năm nhất ngành <b>CN1 (Công nghệ thông tin)</b> tại Trường Đại học Công nghệ - ĐHQGHN (UET). Tôi đam mê lập trình, thích đọc sách và khám phá thiên nhiên.</p>
+                <p><b>Mục tiêu:</b> Nắm vững nền tảng CNTT, AI và trở thành Kỹ sư phần mềm (Software Engineer) xuất sắc trong tương lai.</p>
+                
+                <a href="#projects" class="btn">Xem Dự Án</a>
+                <a href="#summary" class="btn btn-outline">Tổng Kết</a>
+            </div>
+            <div class="hero-image">
+                <img src="./images/avatar.jpg" alt="Avatar Hà Duy Anh" class="avatar-img" onerror="this.style.display='none'">
+            </div>
+        </section>
+
+        <section id="projects" style="padding-top: 40px;">
+            <h2 class="section-title">Bài tập & Dự án</h2>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <span class="badge">Windows & File Explorer</span>
+                    <h3>Bài 1: Máy tính và Thiết bị ngoại vi</h3>
+                    <p><b>Mục tiêu:</b> Quản lý tệp tin/thư mục trên hệ điều hành Windows.</p>
+                    <ul>
+                        <li>Tạo, đổi tên, sao chép thư mục.</li>
+                        <li>Khôi phục tệp từ Recycle Bin.</li>
+                    </ul>
+                    <a href="./pdfs/bai1.pdf" target="_blank" class="btn-pdf">📄 Xem PDF Báo cáo</a>
+                </div>
+
+                <div class="project-card">
+                    <span class="badge">Nghiên cứu & Học thuật</span>
+                    <h3>Bài 2: Khai thác dữ liệu</h3>
+                    <p><b>Mục tiêu:</b> Tìm kiếm, đánh giá thông tin từ các nguồn học thuật đáng tin cậy.</p>
+                    <ul>
+                        <li>Sử dụng Google Scholar.</li>
+                        <li>Phân tích 10 tài liệu tham khảo.</li>
+                    </ul>
+                    <a href="./pdfs/bai2.pdf" target="_blank" class="btn-pdf">📄 Xem PDF Báo cáo</a>
+                </div>
+
+                <div class="project-card">
+                    <span class="badge">Prompt Engineering</span>
+                    <h3>Bài 3: Viết Prompt hiệu quả</h3>
+                    <p><b>Mục tiêu:</b> Xây dựng prompt để khai thác tối đa LLMs.</p>
+                    <ul>
+                        <li>Tóm tắt, giải thích và tạo câu hỏi.</li>
+                        <li>Rút ra nguyên tắc viết prompt.</li>
+                    </ul>
+                    <a href="./pdfs/bai3.pdf" target="_blank" class="btn-pdf">📄 Xem PDF Báo cáo</a>
+                </div>
+
+                <div class="project-card">
+                    <span class="badge">Teamwork & Cloud</span>
+                    <h3>Bài 4: Giao tiếp môi trường số</h3>
+                    <p><b>Mục tiêu:</b> Sử dụng công cụ hợp tác và quản lý dự án nhóm.</p>
+                    <ul>
+                        <li>Quản lý tác vụ, lưu trữ đám mây.</li>
+                        <li>Theo dõi lịch sử chỉnh sửa.</li>
+                    </ul>
+                    <a href="./pdfs/bai4.pdf" target="_blank" class="btn-pdf">📄 Xem PDF Báo cáo</a>
+                </div>
+
+                <div class="project-card">
+                    <span class="badge">Generative AI</span>
+                    <h3>Bài 5: Sáng tạo nội dung với AI</h3>
+                    <p><b>Mục tiêu:</b> Thiết kế infographic, poster, video ngắn bằng AI tạo sinh.</p>
+                    <ul>
+                        <li>Thiết kế ý tưởng qua prompt.</li>
+                        <li>Chỉnh sửa sản phẩm cuối.</li>
+                    </ul>
+                    <a href="./pdfs/bai5.pdf" target="_blank" class="btn-pdf">📄 Xem PDF Báo cáo</a>
+                </div>
+
+                <div class="project-card">
+                    <span class="badge">Security & Ethics</span>
+                    <h3>Bài 6: An toàn & Liêm chính</h3>
+                    <p><b>Mục tiêu:</b> Nhận thức đạo đức, bảo mật khi dùng AI.</p>
+                    <ul>
+                        <li>Thực hành trích dẫn đúng chuẩn.</li>
+                        <li>Lưu trữ nhật ký sử dụng AI.</li>
+                    </ul>
+                    <a href="./pdfs/bai6.pdf" target="_blank" class="btn-pdf">📄 Xem PDF Báo cáo</a>
+                </div>
+
+                <div class="project-card">
+                    <span class="badge">AI Application</span>
+                    <h3>Bài 7: Ứng dụng AI đa ngành</h3>
+                    <p><b>Mục tiêu:</b> Khám phá AI trong Khoa học, Kỹ thuật và Công nghệ.</p>
+                    <ul>
+                        <li>Mô phỏng vật lý, xử lý ảnh.</li>
+                        <li>Bảo trì dự đoán công nghiệp.</li>
+                    </ul>
+                    <a href="./pdfs/bai7.pdf" target="_blank" class="btn-pdf">📄 Xem PDF Báo cáo</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="summary" style="padding-bottom: 60px;">
+            <h2 class="section-title">Tổng kết</h2>
+            <div style="background-color: var(--bg-card); padding: 40px; border-radius: 16px; border: 1px solid var(--border-color);">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+                    <div>
+                        <h3 style="color: var(--accent); margin-bottom: 10px;">Trải nghiệm</h3>
+                        <p style="color: var(--text-muted);">Portfolio giúp tôi hệ thống hóa các sản phẩm học tập và theo dõi sát sao quá trình phát triển của bản thân trong năm học đầu tiên.</p>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--accent); margin-bottom: 10px;">Kỹ năng đạt được</h3>
+                        <ul style="color: var(--text-muted); padding-left: 20px;">
+                            <li>Tìm kiếm & đánh giá thông tin</li>
+                            <li>Làm việc nhóm trực tuyến</li>
+                            <li>Kỹ năng prompt & ứng dụng AI</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--accent); margin-bottom: 10px;">Bài học rút ra</h3>
+                        <p style="color: var(--text-muted);">Việc quản lý tài liệu, thiết kế giao diện (UI/UX) và tư duy sắp xếp nội dung logic là những bài học thực tế quý giá nhất.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Code & Design by Hà Duy Anh</p>
+        </footer>
+    </div>
+
+</body>
+</html>
